@@ -166,30 +166,47 @@ function initRupiahInputs() {
 
 function initNavigation() {
     const menuItems = document.querySelectorAll('.menu-item');
+    const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
     const sections = document.querySelectorAll('.section');
+
+    function activateSection(targetSection, clickedItem) {
+        // Update sidebar menu
+        menuItems.forEach(mi => mi.classList.remove('active'));
+        const sidebarItem = document.querySelector(`.menu-item[data-section="${targetSection}"]`);
+        if (sidebarItem) sidebarItem.classList.add('active');
+
+        // Update bottom nav
+        bottomNavItems.forEach(bni => bni.classList.remove('active'));
+        const bottomItem = document.querySelector(`.bottom-nav-item[data-section="${targetSection}"]`);
+        if (bottomItem) bottomItem.classList.add('active');
+
+        // Show target section
+        sections.forEach(sec => sec.classList.remove('active'));
+        const target = document.getElementById(targetSection);
+        if (target) target.classList.add('active');
+
+        // Close mobile sidebar and overlay
+        if (window.innerWidth <= 768) {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.remove('mobile-open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     menuItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
+            activateSection(this.dataset.section, this);
+        });
+    });
 
-            const targetSection = this.dataset.section;
-
-            // Update active menu
-            menuItems.forEach(mi => mi.classList.remove('active'));
-            this.classList.add('active');
-
-            // Show target section
-            sections.forEach(sec => sec.classList.remove('active'));
-            const target = document.getElementById(targetSection);
-            if (target) target.classList.add('active');
-
-            // Close mobile sidebar
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.remove('mobile-open');
-            document.getElementById('sidebarOverlay').classList.remove('active');
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    bottomNavItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            activateSection(this.dataset.section, this);
         });
     });
 }
@@ -201,9 +218,10 @@ function initNavigation() {
 function initSidebar() {
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('sidebarToggle');
+    const mobileToggleBtn = document.getElementById('mobileMenuToggle');
     const overlay = document.getElementById('sidebarOverlay');
 
-    // Desktop toggle
+    // Desktop toggle (inside sidebar)
     toggleBtn.addEventListener('click', function() {
         if (window.innerWidth > 768) {
             sidebar.classList.toggle('collapsed');
@@ -212,6 +230,14 @@ function initSidebar() {
             overlay.classList.toggle('active');
         }
     });
+
+    // Mobile toggle (in header bar)
+    if (mobileToggleBtn) {
+        mobileToggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('mobile-open');
+            overlay.classList.toggle('active');
+        });
+    }
 
     // Overlay click
     overlay.addEventListener('click', function() {
@@ -225,6 +251,16 @@ function initSidebar() {
             sidebar.classList.remove('mobile-open');
             overlay.classList.remove('active');
         }
+    });
+
+    // Close sidebar when menu item clicked on mobile
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            }
+        });
     });
 }
 
