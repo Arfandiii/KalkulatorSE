@@ -2,14 +2,27 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kalkulator Sensus Ekonomi Indonesia</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<base target="_blank">
 </head>
 <body>
+    <!-- Mobile Header (always visible on mobile) -->
+    <div class="mobile-header" id="mobileHeader">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="mobile-title">
+            <i class="fas fa-calculator"></i>
+            <span>Kalkulator Sensus</span>
+        </div>
+        <div class="mobile-spacer"></div>
+    </div>
+
     <!-- Sidebar Navigation -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -660,5 +673,30 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <script src="script.js"></script>
+
+    <!-- Bottom Navigation for Mobile -->
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="#informasi-usaha" class="bottom-nav-item active" data-section="informasi-usaha">
+            <i class="fas fa-store"></i>
+            <span>Usaha</span>
+        </a>
+        <a href="#data-modal" class="bottom-nav-item" data-section="data-modal">
+            <i class="fas fa-coins"></i>
+            <span>Modal</span>
+        </a>
+        <a href="#data-pendapatan" class="bottom-nav-item" data-section="data-pendapatan">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Omzet</span>
+        </a>
+        <a href="#biaya-operasional" class="bottom-nav-item" data-section="biaya-operasional">
+            <i class="fas fa-wallet"></i>
+            <span>Biaya</span>
+        </a>
+        <a href="#ringkasan" class="bottom-nav-item" data-section="ringkasan">
+            <i class="fas fa-chart-pie"></i>
+            <span>Hasil</span>
+        </a>
+    </nav>
+
 </body>
 </html>
