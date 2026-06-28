@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sensus Ekonomi Indonesia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>Kalkulator Sensus Ekonomi</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="#informasi-usaha" class="menu-item active" data-section="informasi-usaha">
+                <i class="fas fa-store"></i>
+                <span>Informasi Usaha</span>
+            </a>
+            <a href="#profil-responden" class="menu-item" data-section="profil-responden">
+                <i class="fas fa-user"></i>
+                <span>Profil Responden</span>
+            </a>
+            <a href="#lokasi-usaha" class="menu-item" data-section="lokasi-usaha">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Lokasi Usaha</span>
+            </a>
+            <a href="#data-modal" class="menu-item" data-section="data-modal">
+                <i class="fas fa-coins"></i>
+                <span>Data Modal</span>
+            </a>
+            <a href="#data-pendapatan" class="menu-item" data-section="data-pendapatan">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Data Pendapatan</span>
+            </a>
+            <a href="#biaya-operasional" class="menu-item" data-section="biaya-operasional">
+                <i class="fas fa-wallet"></i>
+                <span>Biaya Operasional</span>
+            </a>
+            <a href="#ringkasan" class="menu-item" data-section="ringkasan">
+                <i class="fas fa-chart-pie"></i>
+                <span>Ringkasan & Grafik</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+                <span>Dark Mode</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-calculator"></i> Kalkulator Sensus Ekonomi Indonesia</h1>
+            <p class="subtitle">Alat bantu perhitungan indikator ekonomi usaha untuk petugas sensus</p>
+        </header>
+
+        <!-- Data Quality Score -->
+        <div class="quality-score-container" id="qualityScoreContainer">
+            <div class="quality-score-card">
+                <div class="quality-score-label">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Skor Kualitas Data</span>
+                </div>
+                <div class="quality-score-value" id="qualityScoreValue">0</div>
+                <div class="quality-score-bar">
+                    <div class="quality-score-fill" id="qualityScoreFill"></div>
+                </div>
+                <div class="quality-score-status" id="qualityScoreStatus">Belum Lengkap</div>
+            </div>
+        </div>
+
+        <!-- Warning Messages -->
+        <div class="warnings-container" id="warningsContainer"></div>
+
+        <!-- Section 1: Informasi Usaha -->
+        <section id="informasi-usaha" class="section active">
+            <div class="section-header">
+                <i class="fas fa-store"></i>
+                <h2>Informasi Usaha</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="namaUsaha"><i class="fas fa-building"></i> Nama Usaha</label>
+                                <input type="text" id="namaUsaha" placeholder="Masukkan nama usaha">
+                            </div>
+                            <div class="form-group">
+                                <label for="namaPemilik"><i class="fas fa-user-tie"></i> Nama Pemilik</label>
+                                <input type="text" id="namaPemilik" placeholder="Masukkan nama pemilik">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jenisUsaha"><i class="fas fa-tags"></i> Jenis Usaha</label>
+                                <input type="text" id="jenisUsaha" placeholder="Contoh: Warung, Bengkel, dll">
+                            </div>
+                            <div class="form-group">
+                                <label for="kategoriUsaha"><i class="fas fa-list"></i> Kategori Usaha</label>
+                                <select id="kategoriUsaha">
+                                    <option value="">Pilih Kategori</option>
+                                    <option value="perdagangan">Perdagangan</option>
+                                    <option value="jasa">Jasa</option>
+                                    <option value="industri">Industri</option>
+                                    <option value="pertanian">Pertanian</option>
+                                    <option value="peternakan">Peternakan</option>
+                                    <option value="perikanan">Perikanan</option>
+                                    <option value="kuliner">Kuliner</option>
+                                    <option value="transportasi">Transportasi</option>
+                                    <option value="konstruksi">Konstruksi</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lamaUsaha"><i class="fas fa-calendar-alt"></i> Lama Usaha (tahun)</label>
+                                <input type="number" id="lamaUsaha" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlahCabang"><i class="fas fa-code-branch"></i> Jumlah Cabang</label>
+                                <input type="number" id="jumlahCabang" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tenagaKerjaTetap"><i class="fas fa-users"></i> Tenaga Kerja Tetap</label>
+                                <input type="number" id="tenagaKerjaTetap" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="tenagaKerjaTidakTetap"><i class="fas fa-user-clock"></i> Tenaga Kerja Tidak Tetap</label>
+                                <input type="number" id="tenagaKerjaTidakTetap" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="statusUsaha"><i class="fas fa-clipboard-check"></i> Status Usaha</label>
+                                <select id="statusUsaha">
+                                    <option value="aktif">Aktif</option>
+                                    <option value="tutup-sementara">Tutup Sementara</option>
+                                    <option value="tutup-permanen">Tutup Permanen</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="badanHukum"><i class="fas fa-balance-scale"></i> Berbadan Hukum</label>
+                                <select id="badanHukum">
+                                    <option value="tidak">Tidak</option>
+                                    <option value="ya">Ya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="memilikiNIB"><i class="fas fa-id-card"></i> Memiliki NIB</label>
+                                <select id="memilikiNIB">
+                                    <option value="tidak">Tidak</option>
+                                    <option value="ya">Ya</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tahunMulai"><i class="fas fa-play-circle"></i> Tahun Mulai Beroperasi</label>
+                                <input type="number" id="tahunMulai" min="1900" max="2099" placeholder="2020">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Profil Responden -->
+        <section id="profil-responden" class="section">
+            <div class="section-header">
+                <i class="fas fa-user"></i>
+                <h2>Profil Responden</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="namaResponden"><i class="fas fa-user"></i> Nama Responden</label>
+                                <input type="text" id="namaResponden" placeholder="Masukkan nama responden">
+                            </div>
+                            <div class="form-group">
+                                <label for="teleponResponden"><i class="fas fa-phone"></i> Nomor Telepon (Opsional)</label>
+                                <input type="tel" id="teleponResponden" placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="hubunganResponden"><i class="fas fa-handshake"></i> Hubungan dengan Usaha</label>
+                                <select id="hubunganResponden">
+                                    <option value="">Pilih Hubungan</option>
+                                    <option value="pemilik">Pemilik</option>
+                                    <option value="pengelola">Pengelola</option>
+                                    <option value="karyawan">Karyawan</option>
+                                    <option value="keluarga">Keluarga Pemilik</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Lokasi Usaha -->
+        <section id="lokasi-usaha" class="section">
+            <div class="section-header">
+                <i class="fas fa-map-marker-alt"></i>
+                <h2>Lokasi Usaha</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="provinsi"><i class="fas fa-map"></i> Provinsi</label>
+                                <input type="text" id="provinsi" placeholder="Masukkan provinsi">
+                            </div>
+                            <div class="form-group">
+                                <label for="kabupaten"><i class="fas fa-city"></i> Kabupaten/Kota</label>
+                                <input type="text" id="kabupaten" placeholder="Masukkan kabupaten/kota">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kecamatan"><i class="fas fa-map-pin"></i> Kecamatan</label>
+                                <input type="text" id="kecamatan" placeholder="Masukkan kecamatan">
+                            </div>
+                            <div class="form-group">
+                                <label for="desa"><i class="fas fa-home"></i> Desa/Kelurahan</label>
+                                <input type="text" id="desa" placeholder="Masukkan desa/kelurahan">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Data Modal -->
+        <section id="data-modal" class="section">
+            <div class="section-header">
+                <i class="fas fa-coins"></i>
+                <h2>Data Modal</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="modalAwal"><i class="fas fa-seedling"></i> Modal Awal (Rp)</label>
+                                <input type="text" class="rupiah-input" id="modalAwal" placeholder="0" data-target="modalAwalRaw">
+                                <input type="hidden" id="modalAwalRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="nilaiAset"><i class="fas fa-warehouse"></i> Nilai Aset Usaha (Rp)</label>
+                                <input type="text" class="rupiah-input" id="nilaiAset" placeholder="0" data-target="nilaiAsetRaw">
+                                <input type="hidden" id="nilaiAsetRaw" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="persediaanBarang"><i class="fas fa-boxes"></i> Persediaan Barang (Rp)</label>
+                                <input type="text" class="rupiah-input" id="persediaanBarang" placeholder="0" data-target="persediaanBarangRaw">
+                                <input type="hidden" id="persediaanBarangRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="hutangUsaha"><i class="fas fa-hand-holding-usd"></i> Hutang Usaha (Rp)</label>
+                                <input type="text" class="rupiah-input" id="hutangUsaha" placeholder="0" data-target="hutangUsahaRaw">
+                                <input type="hidden" id="hutangUsahaRaw" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="piutangUsaha"><i class="fas fa-file-invoice-dollar"></i> Piutang Usaha (Rp)</label>
+                                <input type="text" class="rupiah-input" id="piutangUsaha" placeholder="0" data-target="piutangUsahaRaw">
+                                <input type="hidden" id="piutangUsahaRaw" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card result-card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Hasil Perhitungan Modal</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-item">
+                            <span class="result-label">Total Modal</span>
+                            <span class="result-value" id="totalModal">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Kekayaan Bersih Usaha</span>
+                            <span class="result-value" id="kekayaanBersih">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Data Pendapatan -->
+        <section id="data-pendapatan" class="section">
+            <div class="section-header">
+                <i class="fas fa-money-bill-wave"></i>
+                <h2>Data Pendapatan</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="omzetHarian"><i class="fas fa-calendar-day"></i> Omzet Rata-rata per Hari (Rp)</label>
+                                <input type="text" class="rupiah-input" id="omzetHarian" placeholder="0" data-target="omzetHarianRaw">
+                                <input type="hidden" id="omzetHarianRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="hariOperasi"><i class="fas fa-calendar-week"></i> Hari Beroperasi per Bulan</label>
+                                <input type="number" id="hariOperasi" min="0" max="31" placeholder="30">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jamOperasi"><i class="fas fa-clock"></i> Jam Operasional per Hari</label>
+                                <input type="number" id="jamOperasi" min="0" max="24" placeholder="8">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card result-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Hasil Perhitungan Omzet</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-item">
+                            <span class="result-label">Omzet Mingguan</span>
+                            <span class="result-value" id="omzetMingguan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Omzet Bulanan</span>
+                            <span class="result-value" id="omzetBulanan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Omzet Tahunan</span>
+                            <span class="result-value" id="omzetTahunan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Omzet per Jam</span>
+                            <span class="result-value" id="omzetPerJam">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Biaya Operasional -->
+        <section id="biaya-operasional" class="section">
+            <div class="section-header">
+                <i class="fas fa-wallet"></i>
+                <h2>Biaya Operasional</h2>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bahanBaku"><i class="fas fa-cubes"></i> Bahan Baku (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="bahanBaku" placeholder="0" data-target="bahanBakuRaw">
+                                <input type="hidden" id="bahanBakuRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="gajiPegawai"><i class="fas fa-user-friends"></i> Gaji Pegawai (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="gajiPegawai" placeholder="0" data-target="gajiPegawaiRaw">
+                                <input type="hidden" id="gajiPegawaiRaw" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="biayaListrik"><i class="fas fa-bolt"></i> Listrik (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaListrik" placeholder="0" data-target="biayaListrikRaw">
+                                <input type="hidden" id="biayaListrikRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="biayaAir"><i class="fas fa-tint"></i> Air (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaAir" placeholder="0" data-target="biayaAirRaw">
+                                <input type="hidden" id="biayaAirRaw" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="biayaInternet"><i class="fas fa-wifi"></i> Internet (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaInternet" placeholder="0" data-target="biayaInternetRaw">
+                                <input type="hidden" id="biayaInternetRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="biayaTransportasi"><i class="fas fa-car"></i> Transportasi (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaTransportasi" placeholder="0" data-target="biayaTransportasiRaw">
+                                <input type="hidden" id="biayaTransportasiRaw" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="biayaSewa"><i class="fas fa-home"></i> Sewa (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaSewa" placeholder="0" data-target="biayaSewaRaw">
+                                <input type="hidden" id="biayaSewaRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="biayaPajak"><i class="fas fa-receipt"></i> Pajak (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaPajak" placeholder="0" data-target="biayaPajakRaw">
+                                <input type="hidden" id="biayaPajakRaw" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="biayaPemasaran"><i class="fas fa-bullhorn"></i> Biaya Pemasaran (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaPemasaran" placeholder="0" data-target="biayaPemasaranRaw">
+                                <input type="hidden" id="biayaPemasaranRaw" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="biayaLainnya"><i class="fas fa-ellipsis-h"></i> Biaya Lainnya (Rp/bulan)</label>
+                                <input type="text" class="rupiah-input" id="biayaLainnya" placeholder="0" data-target="biayaLainnyaRaw">
+                                <input type="hidden" id="biayaLainnyaRaw" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card result-card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Total Biaya Operasional</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-item">
+                            <span class="result-label">Total Biaya Bulanan</span>
+                            <span class="result-value" id="totalBiayaBulanan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Total Biaya Tahunan</span>
+                            <span class="result-value" id="totalBiayaTahunan">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Ringkasan & Grafik -->
+        <section id="ringkasan" class="section">
+            <div class="section-header">
+                <i class="fas fa-chart-pie"></i>
+                <h2>Ringkasan Hasil</h2>
+            </div>
+
+            <!-- Dashboard Cards -->
+            <div class="dashboard-grid">
+                <div class="stat-card" id="cardModal">
+                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Modal</span>
+                        <span class="stat-value" id="dashModal">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardOmzetHarian">
+                    <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Omzet Harian</span>
+                        <span class="stat-value" id="dashOmzetHarian">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardOmzetBulanan">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Omzet Bulanan</span>
+                        <span class="stat-value" id="dashOmzetBulanan">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardOmzetTahunan">
+                    <div class="stat-icon"><i class="fas fa-calendar"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Omzet Tahunan</span>
+                        <span class="stat-value" id="dashOmzetTahunan">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardTotalBiaya">
+                    <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Biaya</span>
+                        <span class="stat-value" id="dashTotalBiaya">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardLabaBersih">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Laba Bersih</span>
+                        <span class="stat-value" id="dashLabaBersih">Rp 0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardMargin">
+                    <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Margin</span>
+                        <span class="stat-value" id="dashMargin">0%</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardKaryawan">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Jumlah Karyawan</span>
+                        <span class="stat-value" id="dashKaryawan">0</span>
+                    </div>
+                </div>
+                <div class="stat-card" id="cardSkala">
+                    <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">Skala Usaha</span>
+                        <span class="stat-value" id="dashSkala">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profit Section -->
+            <div class="card-grid">
+                <div class="card result-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Analisis Keuntungan</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-item">
+                            <span class="result-label">Laba Kotor</span>
+                            <span class="result-value" id="labaKotor">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Laba Bersih</span>
+                            <span class="result-value" id="labaBersih">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Margin Keuntungan</span>
+                            <span class="result-value" id="marginKeuntungan">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Persentase Biaya terhadap Omzet</span>
+                            <span class="result-value" id="persentaseBiayaOmzet">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Keuntungan per Hari</span>
+                            <span class="result-value" id="keuntunganPerHari">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Keuntungan per Bulan</span>
+                            <span class="result-value" id="keuntunganPerBulan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Keuntungan per Tahun</span>
+                            <span class="result-value" id="keuntunganPerTahun">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card result-card">
+                    <div class="card-header">
+                        <i class="fas fa-users-cog"></i>
+                        <h3>Produktivitas Tenaga Kerja</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-item">
+                            <span class="result-label">Omzet per Karyawan</span>
+                            <span class="result-value" id="omzetPerKaryawan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Laba per Karyawan</span>
+                            <span class="result-value" id="labaPerKaryawan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Produktivitas Tenaga Kerja</span>
+                            <span class="result-value" id="produktivitasTenagaKerja">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Metrics -->
+            <div class="card-grid">
+                <div class="card result-card">
+                    <div class="card-header">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>Analisis Tambahan</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="result-item">
+                            <span class="result-label">Titik Impas (BEP) - Bulanan</span>
+                            <span class="result-value" id="bepBulanan">Rp 0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Rasio Biaya terhadap Omzet</span>
+                            <span class="result-value" id="rasioBiayaOmzet">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Rasio Aset terhadap Omzet</span>
+                            <span class="result-value" id="rasioAsetOmzet">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Omzet per Jam Operasional</span>
+                            <span class="result-value" id="omzetPerJamOperasional">Rp 0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="card-grid">
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>Komposisi Biaya Operasional</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="biayaChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Perbandingan Omzet dan Laba</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="omzetLabaChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="btnHitung">
+                    <i class="fas fa-calculator"></i> Hitung Ulang
+                </button>
+                <button class="btn btn-danger" id="btnReset">
+                    <i class="fas fa-redo"></i> Reset Form
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
