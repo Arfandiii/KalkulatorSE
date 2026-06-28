@@ -44,6 +44,62 @@
 /* Dark Mode Variables */
 [data-theme="dark"] {
     --bg-body: #0f172a;
+/* ============================================
+   MOBILE HEADER
+   ============================================ */
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--text-white);
+    z-index: 1100;
+    align-items: center;
+    padding: 0 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.mobile-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.mobile-title i {
+    font-size: 1.2rem;
+}
+
+.mobile-spacer {
+    width: 40px;
+}
+
     --bg-card: #1e293b;
     --bg-sidebar: #020617;
     --bg-sidebar-hover: #1e293b;
@@ -854,10 +910,72 @@ body {
 }
 
 /* Mobile */
+
+/* ============================================
+   BOTTOM NAVIGATION (Mobile)
+   ============================================ */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    z-index: 1100;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4px 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 12px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border-radius: var(--radius);
+    transition: var(--transition-fast);
+    min-width: 56px;
+}
+
+.bottom-nav-item i {
+    font-size: 1.2rem;
+    transition: var(--transition-fast);
+}
+
+.bottom-nav-item:hover {
+    color: var(--primary-light);
+    background: var(--bg-body);
+}
+
+.bottom-nav-item.active {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.bottom-nav-item.active i {
+    transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+
     .sidebar {
         width: 280px;
         transform: translateX(-100%);
+        top: 56px;
+        height: calc(100vh - 56px);
+        z-index: 1001;
     }
 
     .sidebar.mobile-open {
@@ -873,7 +991,15 @@ body {
 
     .main-content {
         margin-left: 0;
-        padding: 16px;
+        padding: 80px 16px 80px 16px;
+    }
+
+    .bottom-nav {
+        display: flex;
+    }
+
+    .header {
+        display: none;
     }
 
     .header h1 {
@@ -1069,6 +1195,61 @@ input[type="number"] {
 }
 
 /* Responsive font scaling */
+
+/* ============================================
+   BOTTOM NAVIGATION (Mobile)
+   ============================================ */
+.bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    z-index: 1100;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4px 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 12px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 500;
+    border-radius: var(--radius);
+    transition: var(--transition-fast);
+    min-width: 56px;
+}
+
+.bottom-nav-item i {
+    font-size: 1.2rem;
+    transition: var(--transition-fast);
+}
+
+.bottom-nav-item:hover {
+    color: var(--primary-light);
+    background: var(--bg-body);
+}
+
+.bottom-nav-item.active {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.bottom-nav-item.active i {
+    transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
     html {
         font-size: 14px;
